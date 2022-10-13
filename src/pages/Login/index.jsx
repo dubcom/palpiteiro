@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
-import { useLocalStorage } from 'react-use'
 import { Navigate } from 'react-router-dom'
+import { useLocalStorage } from 'react-use'
+import * as yup from 'yup'
 
 import { Icon, Input } from './../../components'
 
@@ -45,19 +45,19 @@ export const Login = () => {
 
   return (
     <div>
-      <header className="p-4 border-b border-red-300">
+      <header className="p-4 border-b bg-red-700 border-white">
         <div className="container max-w-xl flex justify-center">
-          <img src="./imgs/logo.svg" className="w-32 md:w-40" />
+          <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
         </div>
       </header>
 
 
-      <main className="container max-w-xl p-4">
+      <main className="container bg-red-700 max-w-xl p-4">
         <div className="p-4 flex space-x-4 items-center">
           <a href="/">
-            <Icon name="back" className="h-6" />
+            <Icon name="back" className="h-6 text-white" />
           </a>
-          <h2 className="text-xl font-bold">Entre na sua conta</h2>
+          <h2 className="text-xl text-white font-bold">Entre na sua conta</h2>
         </div>
 
         <form className="p-4 space-y-6" onSubmit={formik.handleSubmit}>
@@ -83,6 +83,7 @@ export const Login = () => {
             onBlur={formik.handleBlur}
           />
           <button type='submit' className="w-full text-center text-white bg-red-500 px-6 py-3 rounded-xl block disabled:opacity-50" disabled={!formik.isValid || formik.isSubmitting}>{formik.isSubmitting ? 'Entrando...' : 'Entrar'}</button>
+          <button type='submit' className="w-full text-center text-white bg-red-500 px-6 py-3 rounded-xl block disabled:opacity-50">Entrar com google</button>
 
         </form>
       </main>

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
-import { Navigate } from 'react-router-dom'
-import { useLocalStorage, useAsyncFn } from 'react-use'
-import { format, formatISO } from 'date-fns'
 import axios from 'axios'
+import { format, formatISO } from 'date-fns'
+import { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
+import { useAsyncFn, useLocalStorage } from 'react-use'
 
-import { Icon, Card, DateSelect } from "~/components"
+import { Card, DateSelect, Icon } from "~/components"
 
 export const Dashboard = () => {
   const [currentDate, setDate] = useState(formatISO(new Date(2022, 10, 20)))
@@ -72,7 +72,7 @@ export const Dashboard = () => {
       <main className="space-y-6">
         <section id="header" className=" bg-red-500 text-white">
           <div className="container max-w-3xl space-y-2 p-4">
-            <span>{auth.user.name}</span>
+            <span>Marcos Antonio</span>
             <h3 className="text-2xl font-bold">Qual é o seu palpite?</h3>
           </div>
         </section>
