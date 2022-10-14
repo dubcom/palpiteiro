@@ -1,69 +1,16 @@
-import axios from 'axios'
-import { format, formatISO } from 'date-fns'
-import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
-import { useAsyncFn, useLocalStorage } from 'react-use'
 
-import { Card, DateSelect, Icon } from "~/components"
+import { Icon } from "~/components"
 
 export const Dashboard = () => {
-  const [currentDate, setDate] = useState(formatISO(new Date(2022, 10, 20)))
-  const [auth] = useLocalStorage('auth', {})
+  
 
-  const [{ value: user, loading, error }, fetchHunches] = useAsyncFn(async () => {
-    const res = await axios({
-      method: 'get',
-      baseURL: import.meta.env.VITE_API_URL,
-      url: `/${auth.user.username}`
-    })
-
-    const hunches = res.data.hunches.reduce((acc, hunch) => {
-      acc[hunch.gameId] = hunch
-      return acc
-    }, {})
-
-    return {
-      ...res.data,
-      hunches
-    }
-  })
-
-  const [games, fetchGames] = useAsyncFn(async (params) => {
-    const res = await axios({
-      method: 'get',
-      baseURL: import.meta.env.VITE_API_URL,
-      url: '/games',
-      params
-    })
-
-    return res.data
-  })
-
-  const isLoading = games.loading || loading
-  const hasError = games.error || error
-  const isDone = !isLoading && !hasError
-
-
-  useEffect(() => {
-    fetchHunches()
-  }, [])
-
-
-  useEffect(() => {
-    fetchGames({ gameTime: currentDate })
-  }, [currentDate])
-
-  if (!auth?.user?.id) {
-    return <Navigate to="/" replace={true} />
-  }
 
   return (
-    // O Fragment para quando temos vários elementos ele engloba tudo, vem do próprio React com um import { Fragment } from 'react', mas ele também entende apenas colocando <> e fechando no final com </>
     <>
-      <header className="bg-red-500 text-white">
+      <header className="bg-red-700 text-white">
         <div className="container max-w-3xl flex justify-between p-4">
-          <img src="./imgs/logo-black.svg" className="w-2832 md:w-40" />
-          <a href={`/${auth?.user?.username}`}>
+          <img src="./imgs/logoPalpite.svg" className="w-2832 md:w-40" />
+          <a href={`/848457`}>
             <Icon name="profile" className="w-10" />
           </a>
         </div>
@@ -78,26 +25,41 @@ export const Dashboard = () => {
         </section>
 
         <section id="content" className="container max-w-3xl p-4 space-y-4">
+        <div className="rounded-xl border border-gray-300 p-4 text-center space-y-4">
+      <span className="text-sm md:text-base text-gray-700 font-bold">hoje</span>
 
-          <DateSelect currentDate={currentDate} onChange={setDate} />
+      <form className="flex space-x-4 justify-center items-center">
+        <span className="uppercase">brasil</span>
+        <img src="/imgs/logoB.png" alt="Bandeira da Suiça" className="w-60" />
+       
+
+        <input
+          className=" bg-red-300/[0.15]  w-[55px] h-[55px] text-red-700 text-xl text-center"
+          type="number"
+          name="homeTeamScore"
+         
+        />
+
+        <span className=" text-red-500 font-bold">X</span>
+        <input
+          className=" bg-red-300/[0.15]  w-[55px] h-[55px] text-red-700 text-xl text-center"
+          type="number"
+          name="awayTeamScore"
+       
+        />
+
+        <img src="../imgs/LULA-2022_MARCA_RGB.png" alt="Bandeira da Suiça" className="w-60" />
+        <span className="uppercase">brasil</span>
+      </form>
+      <div> 
+      <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Palpitar </button>
+      <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Cancelar </button>
+      </div>
+    </div>
+          
 
           <div className="space-y-4">
-            {isLoading && 'Carregando jogos...'}
-            {hasError && 'Ops! Algo deu errado.'}
-
-            {isDone && games.value?.map(game => (
-              <Card
-                key={game.id}
-                gameId={game.id}
-                homeTeam={game.homeTeam}
-                awayTeam={game.awayTeam}
-                gameTime={format(new Date(game.gameTime), 'H:mm')}
-                homeTeamScore={user?.hunches?.[game.id]?.homeTeamScore || ''}
-                awayTeamScore={user?.hunches?.[game.id]?.awayTeamScore || ''}
-
-              />
-            ))}
-
+          
 
           </div>
 

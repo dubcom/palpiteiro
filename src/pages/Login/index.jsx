@@ -82,10 +82,16 @@ export const Login = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <button type='submit' className="w-full text-center text-white bg-red-500 px-6 py-3 rounded-xl block disabled:opacity-50" disabled={!formik.isValid || formik.isSubmitting}>{formik.isSubmitting ? 'Entrando...' : 'Entrar'}</button>
-          <button type='submit' className="w-full text-center text-white bg-red-500 px-6 py-3 rounded-xl block disabled:opacity-50">Entrar com google</button>
+          <button type='submit' className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50" disabled={!formik.isValid || formik.isSubmitting}>{formik.isSubmitting ? 'Entrando...' : 'Entrar'}</button>
+          <button type='submit' className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">Entrar com google</button>
 
         </form>
+        <div className=" space-x-2 ">
+          <a href="/signup">
+            <h2 className="text-sl text-center hover:text-sky-400 text-white font-bold">Crie sua conta</h2>
+          </a>
+          
+        </div>
       </main>
     </div>
   )

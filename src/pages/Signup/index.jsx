@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 import { Navigate } from 'react-router-dom'
 import { useLocalStorage } from 'react-use'
+import * as yup from 'yup'
 
 import { Icon, Input } from '~/components'
 
@@ -47,7 +47,9 @@ export const Signup = () => {
     <div>
       <header className="p-4 border-b border-red-300">
         <div className="container max-w-xl flex justify-center">
-          <img src="./imgs/logo.svg" className="w-32 md:w-40" />
+          <a href="/">
+          <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
+          </a>
         </div>
       </header>
       <main className="container max-w-xl p-4">
@@ -103,7 +105,9 @@ export const Signup = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          <button type='submit' className="w-full text-center text-white bg-red-500 px-6 py-3 rounded-xl block disabled:opacity-50" disabled={!formik.isValid || formik.isSubmitting}>{formik.isSubmitting ? 'Criando...' : 'Criar minha conta'}</button>
+          <button type='submit' className="w-full text-center text-white bg-red-500  hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50" disabled={!formik.isValid || formik.isSubmitting}>{formik.isSubmitting ? 'Criando...' : 'Criar minha conta'}</button>
+          <button type='submit' className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">Criar com google</button>
+
         </form>
       </main>
     </div>
