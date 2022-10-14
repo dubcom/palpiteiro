@@ -1,47 +1,28 @@
-import axios from 'axios'
-import { useFormik } from 'formik'
-import { Navigate } from 'react-router-dom'
-import { useLocalStorage } from 'react-use'
-import * as yup from 'yup'
 
-import { Icon, Input } from '~/components'
 
-const validationSchema = yup.object().shape({
-  name: yup.string().required('Preencha seu nome'),
-  username: yup.string().required('Preencha seu nome de usuário'),
-  email: yup.string().email('Informe um email válido').required('Informe seu email'),
-  password: yup.string().required('Digite sua senha')
-});
+import { GoogleAuthProvider } from '../../service/firebase/auth';
 
-export const Signup = () => {
+const provider = new GoogleAuthProvider();
 
-  const [auth, setAuth] = useLocalStorage('auth', {})
+export const Login = () => {
+//login com google firebase auth
+const auth = getAuth();
+signInWithPopup(auth, provider)
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    const credential = GoogleAuthProvider.credentialFromError(error);
+  });
 
-  const formik = useFormik({
-    onSubmit: async (values) => {
+  
+  // login email e senha google 
 
-    const res = await axios({
-        method: 'post',
-        baseURL: import.meta.env.VITE_API_URL,
-        url: '/users',
-        data: values
-      })
-
-      console.log(res.data)
-
-    },
-    initialValues: {
-      name: '',
-      username: '',
-      email: '',
-      password: ''
-    },
-    validationSchema
-  })
-
-  if (auth?.user?.id) {
-    return <Navigate to="/dashboard" replace={true} />
-  }
+    
 
   return (
     <div>
@@ -60,27 +41,14 @@ export const Signup = () => {
           <h2 className="text-xl font-bold">Crie a sua conta</h2>
         </div>
 
-        <form className="p-4 space-y-6" onSubmit={formik.handleSubmit}>
+        <form className="p-4 space-y-6" onSubmit={handleSubscribe}>
           <Input
             type="text"
             name="name"
             label="Seu nome"
             placeholder="Digite seu nome"
-            error={formik.touched.name && formik.errors.name}
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-
-          <Input
-            type="text"
-            name="username"
-            label="Seu nome de usuário"
-            placeholder="Digite um nome de usuário"
-            error={formik.touched.username && formik.errors.username}
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onChange={event => setName(event.target.value)}
+           
           />
 
 
@@ -89,10 +57,8 @@ export const Signup = () => {
             name="email"
             label="Seu e-mail"
             placeholder="Digite seu email"
-            error={formik.touched.email && formik.errors.email}
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onChange={event => setEmail(event.target.value)}
+           
           />
 
           <Input
@@ -100,13 +66,11 @@ export const Signup = () => {
             name="password"
             label="Sua senha"
             placeholder="Digite sua senha"
-            error={formik.touched.password && formik.errors.password}
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onChange={event => setPassword(event.target.value)}
+       
           />
-          <button type='submit' className="w-full text-center text-white bg-red-500  hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50" disabled={!formik.isValid || formik.isSubmitting}>{formik.isSubmitting ? 'Criando...' : 'Criar minha conta'}</button>
-          <button type='submit' className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">Criar com google</button>
+          <button type='submit' disabled={loading} className="w-full text-center text-white bg-red-500  hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50"> Criar minha conta </button>
+          <button type='submit' onClick={handLoginGoogle} className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">Criar com google</button>
 
         </form>
       </main>

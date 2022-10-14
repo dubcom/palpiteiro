@@ -1,5 +1,4 @@
 
-import { Icon } from "~/components"
 
 export const Dashboard = () => {
   
@@ -7,9 +6,11 @@ export const Dashboard = () => {
 
   return (
     <>
-      <header className="bg-red-700 text-white">
+      <header className="bg-red-700 text-white px-8">
         <div className="container max-w-3xl flex justify-between p-4">
-          <img src="./imgs/logoPalpite.svg" className="w-2832 md:w-40" />
+        <a href="/" className="text-white font-bold text-2xl">
+        <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
+        </a>
           <a href={`/848457`}>
             <Icon name="profile" className="w-10" />
           </a>
@@ -25,12 +26,12 @@ export const Dashboard = () => {
         </section>
 
         <section id="content" className="container max-w-3xl p-4 space-y-4">
-        <div className="rounded-xl border border-gray-300 p-4 text-center space-y-4">
-      <span className="text-sm md:text-base text-gray-700 font-bold">hoje</span>
+        <div className="rounded-xl border border-gray-300 p-4 text-center bg-white space-y-4">
+      <span className="text-sm md:text-base text-red-700 font-bold">Hoje Você pode fazer uma aposto no seu palpite e mostrar que sabe tudo sobre política</span>
 
       <form className="flex space-x-4 justify-center items-center">
-        <span className="uppercase">brasil</span>
-        <img src="/imgs/logoB.png" alt="Bandeira da Suiça" className="w-60" />
+        
+        <img src="/imgs/logoB.png" alt="Logo Bolsonaro" className="w-60 " />
        
 
         <input
@@ -48,12 +49,12 @@ export const Dashboard = () => {
        
         />
 
-        <img src="../imgs/LULA-2022_MARCA_RGB.png" alt="Bandeira da Suiça" className="w-60" />
-        <span className="uppercase">brasil</span>
+        <img src="../imgs/LogoL.png" alt="Bandeira da Suiça" className="w-60" />
+        
       </form>
-      <div> 
-      <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Palpitar </button>
+      <div className="flex fles-row p-4 justify-between "> 
       <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Cancelar </button>
+      <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Palpitar </button>
       </div>
     </div>
           

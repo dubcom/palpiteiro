@@ -1,53 +1,28 @@
-import axios from 'axios'
-import { useFormik } from 'formik'
-import { Navigate } from 'react-router-dom'
-import { useLocalStorage } from 'react-use'
-import * as yup from 'yup'
+import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth"
 
-import { Icon, Input } from './../../components'
-
-const validationSchema = yup.object().shape({
-  email: yup.string().email('Informe um email válido').required('Informe seu email'),
-  password: yup.string().required('Digite sua senha')
-});
+const provider = new GoogleAuthProvider()
 
 export const Login = () => {
+//criar login com google firebase auth
+const auth = getAuth()
 
-  const [auth, setAuth] = useLocalStorage('auth', {})
+signInWithPopup(auth, provider).then((result) => {
+const credential = GoogleAuthProvider.credentialFromResult(result);
+const token = credential.accessToken
+const user = result.user
 
-  const formik = useFormik({
-    onSubmit: async (values) => {
-      const res = await axios({
-        method: 'get',
-        baseURL: import.meta.env.VITE_API_URL,
-        url: '/login',
-        auth: {
-          username: values.email,
-          password: values.password
-        }
-      })
+})
 
-      setAuth(res.data)
-
-    },
-
-    initialValues: {
-      email: '',
-      password: ''
-    },
-    validationSchema
-  })
-
-
-  if (auth?.user?.id) {
-    return <Navigate to="/dashboard" replace={true} />
-  }
+// criar login com email e senha firebase 
+  
 
   return (
     <div>
       <header className="p-4 border-b bg-red-700 border-white">
         <div className="container max-w-xl flex justify-center">
-          <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
+        <a href="/" className="text-white font-bold text-2xl">
+        <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
+        </a>
         </div>
       </header>
 
@@ -60,16 +35,13 @@ export const Login = () => {
           <h2 className="text-xl text-white font-bold">Entre na sua conta</h2>
         </div>
 
-        <form className="p-4 space-y-6" onSubmit={formik.handleSubmit}>
+        <form className="p-4 space-y-6" onSubmit={handleSubmit}>
           <Input
             type="text"
             name="email"
             label="Seu e-mail"
             placeholder="Digite seu email"
-            error={formik.touched.email && formik.errors.email}
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            
           />
 
           <Input
@@ -77,20 +49,24 @@ export const Login = () => {
             name="password"
             label="Sua senha"
             placeholder="Digite sua senha"
-            error={formik.touched.password && formik.errors.password}
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            
           />
           <button type='submit' className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50" disabled={!formik.isValid || formik.isSubmitting}>{formik.isSubmitting ? 'Entrando...' : 'Entrar'}</button>
-          <button type='submit' className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">Entrar com google</button>
-
+          <button
+              onClick={handleLogin}
+              className="text-center text-white bg-red-500 hover:bg-red-300  text-xl px-8 py-4 rounded-xl"
+            >
+              {' '}
+              Entrar com google{' '}
+            </button>
         </form>
         <div className=" space-x-2 ">
           <a href="/signup">
             <h2 className="text-sl text-center hover:text-sky-400 text-white font-bold">Crie sua conta</h2>
           </a>
-          
+          <div className="flex flex-col items-center justify-center h-screen">
+<button onClick={signInWithGoogle}>Sign in with Google</button>
+</div>
         </div>
       </main>
     </div>
