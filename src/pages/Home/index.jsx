@@ -13,7 +13,9 @@ export function Home() {
     <> 
     <header className="container content-center bg-red-700 flex justify-between max-w-5xl p-4">
       <div>
+        <a href="/" className="text-white font-bold text-2xl">
         <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
+        </a>
       </div>
     <div className="align-end"> 
     <a href="/login" className=" uppercase text-white"> Entrar </a>
@@ -27,8 +29,9 @@ export function Home() {
     <div className="container max-w-5xl  flex-1 p-4 flex flex-col items-center md:flex-row space-y-6 md:space-y-0 md:space-x-6">
 
 
-      <div className="md:flex-1 flex justify-center bg-yellow-500">
-      <img src="./imgs/lula-bolsonaro-foto-oficial.webp" className="w-650"/>
+      <div className="md:flex-1 flex flex-col p-2justify-center bg-yellow-500">
+      <img src="./imgs/logoL.png" className="w-650"/>
+      <img src="./imgs/logoB.png" className="w-650"/>
       </div>
      
 
