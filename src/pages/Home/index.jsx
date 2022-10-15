@@ -1,5 +1,16 @@
+import { GoogleAuthProvider } from "firebase/auth";
+import React from "react-dom";
 
+const provider = new GoogleAuthProvider();
 export function Home() {
+  //login com google firebase auth
+
+
+
+  // login com email e senha firebase
+
+
+
  
 
   return (
@@ -32,7 +43,7 @@ export function Home() {
       <h1 className="text-3xl text-center md:text-left font-bold">Você gosta de dar Palpite??</h1>
      
       <a href="/signup" className="text-center text-red-700 bg-white  hover:bg-gray-300  text-xl px-8 py-4 rounded-xl">Criar minha conta</a>
-      <button className="text-center text-white bg-red-500 hover:bg-red-300  text-xl px-8 py-4 rounded-xl"> Entrar com google </button>
+      <button onClick="#" className="text-center text-white bg-red-500 hover:bg-red-300  text-xl px-8 py-4 rounded-xl"> Entrar com google </button>
 
       
     </div>
