@@ -1,13 +1,15 @@
-import React from "react";
-import { useAuth } from "../../contexts/authGoogle";
+import React, { useEffect } from "react";
+import { AuthGoogleContext } from "../../contexts/authGoogle";
 
 export const Dashboard = () => {
-  const setUser = firebase.auth().currentUser;
-  const { logout } = useAuth();
-  const useNavigate = useNavigate();
+  const { user, signOut} = useContext(AuthGoogleContext);
+  useEffect(() => {
+    if (!user) {
+    console.log("Não está logado");
+    }
+  }, [user]);
 
- 
-
+  
 
   return (
     <>
