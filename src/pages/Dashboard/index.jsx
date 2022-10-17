@@ -1,25 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { AuthGoogleContext } from "../../contexts/authGoogle";
 
 export const Dashboard = () => {
   const { user, signOut} = useContext(AuthGoogleContext);
-  useEffect(() => {
-    if (!user) {
-    console.log("Não está logado");
-    }
-  }, [user]);
-
-  
+  let userLogin = JSON.parse(user)
+  console.log(userLogin)
 
   return (
     <>
-      <header className="bg-red-700 text-white px-8">
+      <header className="bg-red-700 flex flex-row text-white px-8">
         <div className="container max-w-3xl flex justify-between p-4">
           <a href="/" className="text-white font-bold text-2xl">
             <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
           </a>
-          <a href={`/848457`}>
-            <img src={user.photoURL} alt={user.displayName} className="w-10 h-10 rounded-full" />
+          <a href={`/{userLogin.UID}`}>
+            <img src={userLogin.photoURL} alt={userLogin.displayName} className="w-10 h-10 rounded-full" />
             <img src="./imgs/arrow-left.svg" className=" w-10" />
           </a>
         </div>
