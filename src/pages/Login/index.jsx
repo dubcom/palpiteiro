@@ -47,9 +47,6 @@ export const Login = () => {
           navigate("/dashboard")
         }
       }}
-      
-  
-    
 
 
     return (
