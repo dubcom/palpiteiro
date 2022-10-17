@@ -1,17 +1,28 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthGoogleContext } from "../../contexts/authGoogle";
 
 
 export function Home() {
-  //login com google firebase auth
+   const { signed, signInGoogle } = useContext(AuthGoogleContext);
 
-
-
-  // login com email e senha firebase
-
-
+  async function handleLoginFromGoogle() {
+    await signInGoogle();
+}  if (signed) {
+    return <Navigate to="/dashboard" />
+  }   
+  
 
  
+
+  // se tiver logado vai direcionar para pagina de perfil
+  if (signed) {
+    return <Navigate to="/profile" />
+  }
+
+
+  // se não tiver logado vai mostrar o botão de login
+
 
   return (
     <> 
@@ -28,8 +39,6 @@ export function Home() {
     
     <div className="min-h-screen bg-red-700 text-white p-4 flex flex-col items-center space-y-6">
 
-    
-
     <div className="container max-w-5xl  flex-1 p-4 flex flex-col items-center md:flex-row space-y-6 md:space-y-0 md:space-x-6">
 
 
@@ -43,7 +52,7 @@ export function Home() {
       <h1 className="text-3xl text-center md:text-left font-bold">Você gosta de dar Palpite??</h1>
      
       <a href="/signup" className="text-center text-red-700 bg-white  hover:bg-gray-300  text-xl px-8 py-4 rounded-xl">Criar minha conta</a>
-      <button onClick="#" className="text-center text-white bg-red-500 hover:bg-red-300  text-xl px-8 py-4 rounded-xl"> Entrar com google </button>
+      <button onClick={handleLoginFromGoogle} className="text-center text-white bg-red-500 hover:bg-red-300  text-xl px-8 py-4 rounded-xl"> Entrar com google </button>
 
       
     </div>
