@@ -1,18 +1,24 @@
-  import React from "react";
-
+import React from "react";
+import { useAuth } from "../../contexts/authGoogle";
 
 export const Dashboard = () => {
-  
+  const setUser = firebase.auth().currentUser;
+  const { logout } = useAuth();
+  const useNavigate = useNavigate();
+
+ 
+
 
   return (
     <>
       <header className="bg-red-700 text-white px-8">
         <div className="container max-w-3xl flex justify-between p-4">
-        <a href="/" className="text-white font-bold text-2xl">
-        <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
-        </a>
+          <a href="/" className="text-white font-bold text-2xl">
+            <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
+          </a>
           <a href={`/848457`}>
-          <img src="./imgs/arrow-left.svg" className=" w-10" />
+            <img src={user.photoURL} alt={user.displayName} className="w-10 h-10 rounded-full" />
+            <img src="./imgs/arrow-left.svg" className=" w-10" />
           </a>
         </div>
       </header>
@@ -26,41 +32,41 @@ export const Dashboard = () => {
         </section>
 
         <section id="content" className="container max-w-3xl p-4 space-y-4">
-        <div className="rounded-xl border border-gray-300 p-4 text-center bg-white space-y-4">
-      <span className="text-sm md:text-base text-red-700 font-bold">Hoje Você pode fazer uma aposto no seu palpite e mostrar que sabe tudo sobre política</span>
+          <div className="rounded-xl border border-gray-300 p-4 text-center bg-white space-y-4">
+            <span className="text-sm md:text-base text-red-700 font-bold">Hoje Você pode fazer uma aposto no seu palpite e mostrar que sabe tudo sobre política</span>
 
-      <form className="flex space-x-4 justify-center items-center">
-        
-        <img src="/imgs/logoB.png" alt="Logo Bolsonaro" className="w-60 " />
-       
+            <form className="flex space-x-4 justify-center items-center">
 
-        <input
-          className=" bg-red-300/[0.15]  w-[55px] h-[55px] text-red-700 text-xl text-center"
-          type="number"
-          name="homeTeamScore"
-         
-        />
+              <img src="/imgs/logoB.png" alt="Logo Bolsonaro" className="w-60 " />
 
-        <span className=" text-red-500 font-bold">X</span>
-        <input
-          className=" bg-red-300/[0.15]  w-[55px] h-[55px] text-red-700 text-xl text-center"
-          type="number"
-          name="awayTeamScore"
-       
-        />
 
-        <img src="../imgs/LogoL.png" alt="Bandeira da Suiça" className="w-60" />
-        
-      </form>
-      <div className="flex fles-row p-4 justify-between "> 
-      <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Cancelar </button>
-      <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Palpitar </button>
-      </div>
-    </div>
-          
+              <input
+                className=" bg-red-300/[0.15]  w-[55px] h-[55px] text-red-700 text-xl text-center"
+                type="number"
+                name="homeTeamScore"
+
+              />
+
+              <span className=" text-red-500 font-bold">X</span>
+              <input
+                className=" bg-red-300/[0.15]  w-[55px] h-[55px] text-red-700 text-xl text-center"
+                type="number"
+                name="awayTeamScore"
+
+              />
+
+              <img src="../imgs/LogoL.png" alt="Bandeira da Suiça" className="w-60" />
+
+            </form>
+            <div className="flex fles-row p-4 justify-between ">
+              <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Cancelar </button>
+              <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Palpitar </button>
+            </div>
+          </div>
+
 
           <div className="space-y-4">
-          
+
 
           </div>
 

@@ -11,13 +11,14 @@ import { Profile } from './Profile'
 import { Signup } from './Signup'
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
+  
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/",
+    element: <Home />,
   },
   {
     path: "/signup",
