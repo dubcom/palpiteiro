@@ -1,8 +1,8 @@
+  import React from "react";
 
 
 export const Dashboard = () => {
   
-
 
   return (
     <>
@@ -12,7 +12,7 @@ export const Dashboard = () => {
         <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
         </a>
           <a href={`/848457`}>
-            <Icon name="profile" className="w-10" />
+          <img src="./imgs/arrow-left.svg" className=" w-10" />
           </a>
         </div>
       </header>

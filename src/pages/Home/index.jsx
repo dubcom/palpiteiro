@@ -1,7 +1,7 @@
-import { GoogleAuthProvider } from "firebase/auth";
+
 import React from "react-dom";
 
-const provider = new GoogleAuthProvider();
+
 export function Home() {
   //login com google firebase auth
 

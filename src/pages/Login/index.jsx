@@ -1,36 +1,34 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../service/firebase";
 
-
-const provider = new GoogleAuthProvider();
 
 export const Login = () => {
-//criar login com google firebase auth
-const auth = getAuth();
-signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
+let navigate = useNavigate();
 
+//Fazer login com google firebase auth
 
+const handleClickButtonGoogle = async () => {
+signInWithPopup(auth, new GoogleAuthProvider())
+.then((result) => {
+  const credential = GoogleAuthProvider.credentialFromResult(result);
+  const token = credential.accessToken;
+  const user = result.user;
+  console.log(user);
+  navigate("/dashboard")
+})
 
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  const email = error.email;
+  const credential = GoogleAuthProvider.credentialFromError(error);
+  console.log(errorCode, errorMessage, email, credential);
+});
 
-
-// criar login com email e senha firebase 
-  
+}
+// logout com firebase
 
   return (
     <div>
@@ -51,13 +49,14 @@ signInWithPopup(auth, provider)
           <h2 className="text-xl text-white font-bold">Entre na sua conta</h2>
         </div>
 
-        <form className="p-4 space-y-6" onSubmit="#">
+        <form className="p-4 space-y-6" >
           <input
             type="text"
             name="email"
             label="Seu e-mail"
             placeholder="Digite seu email"
             className="w-full border border-gray-300 rounded-xl px-4 py-2"
+            onChange={(event) => setLoginEmail(event.target.value)}
             
           />
 
@@ -67,20 +66,25 @@ signInWithPopup(auth, provider)
             label="Sua senha"
             placeholder="Digite sua senha"
             className="w-full border border-gray-300 rounded-xl px-4 py-2"
+            onChange={(event) => setLoginPassword(event.target.value)}
 
             
           />
           <button type='submit' className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">ENTRAR </button>
-          <button type='submit' onClick={signInWithPopup()} className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">ENTRAR COM GOOGLE </button>
-         
+          
         </form>
+        <div className="p-4 flex space-x-4 items-center">
+        <button type='submit' onClick={handleClickButtonGoogle} className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">ENTRAR COM GOOGLE </button>
+          </div>
+         
         <div className=" space-x-2 ">
           <a href="/signup">
             <h2 className="text-sl text-center hover:text-sky-400 text-white font-bold">Crie sua conta</h2>
           </a>
-          <div className="flex flex-col items-center justify-center h-screen">
-<button onClick="#">Sign in with Google</button>
-</div>
+         
+        
+          <button type='submit' onClick="#" className="text-sl text-center hover:text-sky-400 text-white font-bold">Sair</button>
+ 
         </div>
       </main>
     </div>
