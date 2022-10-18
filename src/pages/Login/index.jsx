@@ -31,49 +31,19 @@ export const Login = () => {
             <img src="./imgs/arrow-left.svg" className="h-6 text-white" />
 
           </a>
-          <h2 className="text-xl text-white font-bold">Entre na sua conta</h2>
+          <h2 className="text-xl text-white font-bold">Obrigado por palpitar...</h2>
         </div>
-
-        <form onSubmit={() => { }} className="p-4 space-y-6" >
-          <input
-            type="email"
-            name="email"
-            label="Seu e-mail"
-            placeholder="Digite seu email"
-            className="w-full border border-gray-300 rounded-xl px-4 py-2"
-            ref={() => { }}
-            required
-
-          />
-
-          <input
-            type="password"
-            name="password"
-            label="Sua senha"
-            placeholder="Digite sua senha"
-            className="w-full border border-gray-300 rounded-xl px-4 py-2"
-            ref={() => { }}
-            required
-
-
-          />
-          <button type='submit' className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">ENTRAR </button>
-        </form>
-        <div className="p-4 flex space-x-4 items-center">
-          <button onClick={handleLoginFromGoogle} className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">ENTRAR COM GOOGLE </button>
-        </div>
-
-        <div className=" container max-w-3xl flex flex-row center justify-between p-4">
-          <div className="p-4  text-white">
-            Esqueceu sua senha? <a href="/forgot-password" className="text-red-500">Clique aqui</a>
-
-            <div>
-              <a href="/signup">
-                <h2 className="text-sl  hover:text-sky-400 text-white font-bold">Crie sua conta</h2>
-              </a>
-            </div>
-
+        <div className="p-4 bg-white rounded-lg"> 
+          <div className="flex flex-col items-center">
+           
+            <h2 className="text-xl text-red-700 py-4 font-bold">Obrigado pelo palpite.</h2>
+            <p className="text-center">Logo após confirmar seu pagamento, seu palpite vai concorrer  a prêmios</p>
+            <p className="text-center"> Você pode voltar ao seu perfil a qualquer momento, basta clicar no botão a baixo </p>
+          </div>  
           </div>
+        
+        <div className="p-4 flex space-x-4 items-center">
+          <button onClick={handleLoginFromGoogle} className="w-full text-center uppercase text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">voltar </button>
         </div>
 
       </main>
