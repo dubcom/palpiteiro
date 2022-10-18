@@ -6,7 +6,7 @@ export const Profile = () => {
   const { user, signOut, signed } = useContext(AuthGoogleContext);
   let userLogin = JSON.parse(user)
 if (!signed) {
-    return <Navigate to="/login" />
+    return <Navigate to="/home" />
   }
   
 
