@@ -10,31 +10,26 @@ export const Dashboard = () => {
   let userLogin = JSON.parse(user)
   // console.log(userLogin.uid)
   // const [userUid, setUserUid] = useState(userLogin.uid)
-if (!signed) {
+  if (!signed) {
     return <Navigate to="/login" />
   }
 
-  const [awayTeamScore, setAwayTeamScore]  = useState("");
-  const  [homeTeamScore, setHomeTeamScore ] = useState("");
-  const userId = useState(userLogin.uid);
-  const name = useState(userLogin.displayName);
+  const [awayTeamScore, setAwayTeamScore] = useState("");
+  const [homeTeamScore, setHomeTeamScore] = useState("");
+  const [userId, setUserId] = useState(userLogin.uid);
+  const [name, seteName] = useState(userLogin.displayName);
   const valueBet = 5;
 
- 
+
   async function handleChange() {
-    console.log( awayTeamScore, valueBet, homeTeamScore, userId, name)
+    let data = [awayTeamScore, valueBet, homeTeamScore, userId, name]
+    console.log(data)
     const db = getDatabase();
-    set(ref(db, 'bet/'+ userId), {
-      awayTeamScore: awayTeamScore,
-      homeTeamScore: homeTeamScore,
-      userId: userId,
-      name: name,
-      valueBet: valueBet,
-    });
-    
+    set(ref(db, `bet/${userId}/betCreated`), data);
+
   }
 
-  
+
 
   return (
     <>
@@ -99,14 +94,14 @@ if (!signed) {
               />
 
               <img src="../imgs/LogoL.png" alt="Logo do lula Lula" className="w-60" />
-              
+
 
             </form>
             <div className="flex fles-row p-4 justify-between ">
               <button className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Cancelar </button>
               <button onClick={handleChange} className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Palpitar </button>
             </div>
-            
+
           </div>
 
 
