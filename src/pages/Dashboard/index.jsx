@@ -81,6 +81,8 @@ if (!signed) {
                 name="homeTeamScore"
                 value={homeTeamScore}
                 placeholder="0"
+                min="1"
+                max="100"
                 onChange={(e) => setHomeTeamScore(e.target.value)}
               />
 
@@ -91,6 +93,8 @@ if (!signed) {
                 name="awayTeamScore"
                 value={awayTeamScore}
                 placeholder="0"
+                min="1"
+                max="100"
                 onChange={(e) => setAwayTeamScore(e.target.value)}
               />
 

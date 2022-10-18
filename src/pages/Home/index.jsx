@@ -12,9 +12,6 @@ export function Home() {
     return <Navigate to="/dashboard" />
   }   
   
-
- 
-
   // se tiver logado vai direcionar para pagina de perfil
   if (signed) {
     return <Navigate to="/profile" />
