@@ -1,6 +1,6 @@
+import { getDatabase, ref, set } from "firebase/database";
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
-
 import { AuthGoogleContext } from "../../contexts/authGoogle";
 
 export const Dashboard = () => {
@@ -8,43 +8,33 @@ export const Dashboard = () => {
   // login com google verification 
   const { user, signOut, signed } = useContext(AuthGoogleContext);
   let userLogin = JSON.parse(user)
-  console.log(userLogin.uid)
+  // console.log(userLogin.uid)
+  // const [userUid, setUserUid] = useState(userLogin.uid)
 if (!signed) {
     return <Navigate to="/login" />
   }
 
   const [awayTeamScore, setAwayTeamScore]  = useState("");
   const  [homeTeamScore, setHomeTeamScore ] = useState("");
+  const userId = useState(userLogin.uid);
+  const name = useState(userLogin.displayName);
+  const valueBet = 5;
+
  
-  function handleChange(){
-    console.log(awayTeamScore, homeTeamScore)
+  async function handleChange() {
+    console.log( awayTeamScore, valueBet, homeTeamScore, userId, name)
+    const db = getDatabase();
+    set(ref(db, 'bet/'+ userId), {
+      awayTeamScore: awayTeamScore,
+      homeTeamScore: homeTeamScore,
+      userId: userId,
+      name: name,
+      valueBet: valueBet,
+    });
+    
   }
 
-  // const handleChange = (e) => {
-  //   e.preventDefault();
-  //   setAwayTeamScore(e.target.value);
-  //   setHomeTeamScore(e.target.value); 
-   
-  // }
-  //Criar pix realtime 
-  // const user = firebase.auth().currentUser;
-  // async function handCreateBet(event) {
-  //   event.preventDefault()
-
-  //   const firebaseClient = {
-  //     homeTeamScore: HomeTeamScore,
-  //     awayTeamScore: AwayTeamScore,
-  //     authorId: currentUser.uid,
-  //     // date utc create 
-  //     date: new Date().toUTCString()
-  //   };
-  //   const created = await firebase.database().ref(`clients/${user?.uid}/PixBet/`).push(firebaseClient);
-  //   console.log(created.key);
-  //   // + {created.key}
-  //   return <Navigate to="/Dashboard" />;
-  // };
-
-
+  
 
   return (
     <>
@@ -84,6 +74,7 @@ if (!signed) {
               <img src="/imgs/logoB.png" alt="Logo Bolsonaro" className="w-60 " />
 
 
+
               <input
                 className=" bg-red-300/[0.15]  w-[55px] h-[55px] text-red-700 text-xl text-center"
                 type="number"
@@ -91,8 +82,6 @@ if (!signed) {
                 value={homeTeamScore}
                 placeholder="0"
                 onChange={(e) => setHomeTeamScore(e.target.value)}
-
-
               />
 
               <span className=" text-red-500 font-bold">X</span>
@@ -103,10 +92,10 @@ if (!signed) {
                 value={awayTeamScore}
                 placeholder="0"
                 onChange={(e) => setAwayTeamScore(e.target.value)}
-
               />
 
               <img src="../imgs/LogoL.png" alt="Logo do lula Lula" className="w-60" />
+              
 
             </form>
             <div className="flex fles-row p-4 justify-between ">
