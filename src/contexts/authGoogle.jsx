@@ -1,4 +1,4 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { app } from '../service/firebase';
@@ -39,6 +39,19 @@ export const AuthGoogleProvider = ({ children }) => {
         const credential = GoogleAuthProvider.credentialFromError(error);
       });
   }
+  function signInEmailPassword(email, password) {
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+  }
 
   function signOut() {
     sessionStorage.clear();
@@ -60,10 +73,3 @@ export const AuthGoogleProvider = ({ children }) => {
   );
 };
 
-// export default function AuthContextProvider({ props }) {
-// const [user, setUser] = useState(null);
-//   return 
-//   <AuthContext.Provider value={{user, setUser}}>
-//     {props.children}
-//   </AuthContext.Provider>
-// }

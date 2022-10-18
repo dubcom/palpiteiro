@@ -1,34 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
 
-
+import { AuthGoogleContext } from "../../contexts/authGoogle";
 
 export const Signup = () => {
-  // login com email e senha firebase
- 
-    //login com email e senha firebase
-    
+  // login bottom google
+  const { signed, signInGoogle } = useContext(AuthGoogleContext);
 
-  //login com google firebase auth
-  async function handLoginGoogle() {
-
-    const provider = new firebase.auth.GoogleAuthProvider();
-    await firebase.auth().signInWithPopup(provider).then((result) => {
-
-
-    })
-    try {
-      setError("")
-      setLoading(true)
-      history.push("/")
-    } catch {
-      setError("Algo deu errado, tente novamente")
-
-    }
-
+  async function handleLoginFromGoogle() {
+    await signInGoogle();
+  } if (signed) {
+    return <Navigate to="/dashboard" />
   }
 
-
-
+  //login com email e senha firebase
+ async function handleLoginFromEmailPassword() {
+    await signInEmailPassword();
+  } if (signed) {
+    return <Navigate to="/dashboard" />
+  }
+  
 
   return (
     <div>
@@ -47,14 +38,14 @@ export const Signup = () => {
           <h2 className="text-xl font-bold">Crie a sua conta</h2>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4 space-y-6" >
+        <form onSubmit={()=>{}} className="p-4 space-y-6" >
           <input
             type="text"
             name="email"
             label="Seu e-mail"
             placeholder="Digite seu nome"
             className="w-full border border-gray-300 rounded-xl px-4 py-2"
-            ref={emailRef}
+            ref={()=>{}}
             required
 
           />
@@ -65,7 +56,7 @@ export const Signup = () => {
             label="Seu e-mail"
             placeholder="Digite seu email"
             className="w-full border border-gray-300 rounded-xl px-4 py-2"
-            ref={passwordRef}
+            ref={() => { }}
             required
           />
 
@@ -75,13 +66,13 @@ export const Signup = () => {
             label="Sua senha"
             placeholder="Digite sua senha"
             className="w-full border border-gray-300 rounded-xl px-4 py-2"
-            ref={passwordConfirmRef}
+            ref={() => { }}
             required
 
 
           />
-          <button type='submit' disabled={loading} className="w-full text-center text-white bg-red-500  hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50"> Criar minha conta </button>
-          <button onClick={handLoginGoogle} className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">Criar com google</button>
+          <button type='submit' disabled={()=>{}} className="w-full text-center text-white bg-red-500  hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50"> Criar minha conta </button>
+          <button onClick={handleLoginFromGoogle} className="w-full text-center text-white bg-red-500 hover:bg-red-300 px-6 py-3 rounded-xl block disabled:opacity-50">Criar com google</button>
 
         </form>
       </main>
