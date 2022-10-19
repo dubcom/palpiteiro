@@ -53,7 +53,7 @@ export function Home() {
          
           <div className="flex flex-col  items-center justify-center align-center md:flex-row w-screen px-8 p-2  bg-yellow-500">
             <div>
-              <img src="./imgs/logoL.png" alt="Logo Lula presidente" className="w-650" />
+              <img src="./imgs/LogoL.png" alt="Logo Lula presidente" className="w-650" />
             </div>
             <div className=" max-w-5xl text-center inline-block align-middle px-8">
               <h3 className="text-3xl font-bold text-red-700">X</h3>
