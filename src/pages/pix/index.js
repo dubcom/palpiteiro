@@ -6,8 +6,8 @@ export default class Pix {
     this.merchantName = merchantName;
     this.merchantCity = merchantCity;
     this.txid = txid;
-    this.amount = amount;
-    // this.amount = amount.toFixed(2);
+    // this.amount = amount;
+    this.amount = amount.toFixed(2);
 
 
 
