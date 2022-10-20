@@ -44,17 +44,17 @@ export const Profile = () => {
 
   return (
     <>
-      <header className="bg-red-700 flex flex-row text-white px-8">
-        <div className="container max-w-3xl flex flex-row justify-between p-4">
+      <header className="bg-red-700 flex flex-row text-white ">
+        <div className="container max-w-3xl flex flex-row justify-between p-2">
           <a href="/" className="text-white font-bold text-2xl">
             <img src="./imgs/logoPalpite.svg" className="w-32 md:w-40" />
           </a>
           <div className="flex flex-row ">
             <div className="flex flex-row items-center">
-              <img src={userLogin.photoURL} className="w-10 h-10 rounded-full" />
-              <span className="ml-2">{userLogin.displayName}</span>
+              <img src={userLogin.photoURL} className="w-10 h-10 p-2 rounded-full" />
+              <span className="text-xs ">{userLogin.displayName}</span>
             </div>
-            <div className="flex flex-row items-center ml-4">
+            <div className="flex flex-row text-xs items-center ml-4">
               <button onClick={signOut}>Sair</button>
             </div>
           </div>
@@ -62,42 +62,35 @@ export const Profile = () => {
       </header>
 
       <main className="space-y-6 justify-center">
-        <section className=" bg-red-500 text-white flex flex-row">
-          <div className="container flex flex-row">
+        <section className=" bg-red-500 text-white">
+          <div className="flex flex-row items-center">
             <a href="/dashboard"><img src="./imgs/arrow-left.svg" className=" w-10" />
             </a>
             <div>
-              <p className="text-2xl align-center font-bold">Faça seu pagamento</p>
+              <p className="text-1xl font-bold">Faça seu pagamento</p>
             </div>
           </div>
         </section>
 
         <section className="container max-w-3xl p-4 space-y-4">
-          <h2 className="text-red-500 text-xl font-bold">Seus palpites</h2>
-
-          <div className="space-y-4">
-
-            <h1> {userLogin.displayName}</h1>
-          </div>
 
         </section>
-        <section className="container max-w-3xl items-center p-4 space-y-4">
-          <p className="text-white text-xl align-center ">Leia o QR-Code com aplicativo do seu banco, ou copie o código e é só esperar para ver se seu palpite é certeiro </p>
-          <div className="flex center">
+        <section className="container max-w-3xl text-center p-4 space-y-4">
+          <p className="text-white text-xl text-center ">Leia o QR-Code com aplicativo do seu banco, ou copie o código e é só esperar para ver se seu palpite é certeiro </p>
+         
             <p> Leia o QR-Code com aplicativo do seu banco, ou copie o código e é só esperar para ver se seu palpite é certeiro</p>
             <QRCode value={payload}
               size={280}
               level="H"
-              includeMargin={true}/>
-          </div>
-          <div className=" bg-green-200 justify-center ">
-            <h3 className=" text-red-500 font-bold ">Pague com o PIX</h3>
-            <p className="text-red-700 px-2 text-xs ">{payload}</p>
-            <div className="p-2">
-
-              <button onClick={() => navigator.clipboard.writeText(payload)}
-                className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Copiar pix </button>
-            </div>
+              includeMargin={true}
+              className="justify-center "/>
+     
+          <div className=" bg-green-200 text-center justify-center p-4">
+            <h3 className=" text-red-500 font-bold uppercase pb-2">Pague com o PIX</h3>
+            <p className="text-red-700 px-2 text-xs text-center pb-2 break-words">{payload}</p>
+            <button onClick={() => navigator.clipboard.writeText(payload)}
+                className="bg-red-500  text-white font-bold py-2 px-4  rounded-full"> Copiar pix </button>
+        
           </div>
 
         </section>
