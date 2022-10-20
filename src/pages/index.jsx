@@ -13,24 +13,19 @@ import { Signup } from './Signup'
 const router = createBrowserRouter([
   
   {
-    path: "/login",
-    element: <Login />,
+    path: "/login",  element: <Login />,
   },
   {
-    path: "/",
-    element: <Home />,
+    path: "/", element: <Home />,
   },
   {
-    path: "/signup",
-    element: <Signup />,
+    path: "/signup", element: <Signup />,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/dashboard", element: <Dashboard />,
   },
   {
-    path: "/:username",
-    element: <Profile />,
+    path: "/:idPayment", element: <Profile />,
   },
 ]);
 

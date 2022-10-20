@@ -28,8 +28,8 @@ export function Home() {
       </header>
       <main className="container max-w-5xl flex flex-col  items-center">
         <div className="flex flex-col text-white justify-center items-center">
-          <img src="./imgs/logoPalpite.svg" className="w-100 md:w-50" />
-          <h1 className="text-4xl text-white font-bold">Valor do premio <strong>R$ 12.985,00</strong></h1>
+          <img src="./imgs/logoPalpite.svg" alt="Logo O Palpite" className="w-100 md:w-50" />
+          <h1 className="text-4xl p-8 text-white font-bold">Valor do premio <strong>R$ 12.985,00</strong></h1>
           <h1 className="text-2xl font-bold text-center">Faça seu palpite</h1>
           <p className="text-center">Dê o seu palpite, se você acertar pode ganhar <strong>R$ 12.985,00</strong>.</p>
         </div>
