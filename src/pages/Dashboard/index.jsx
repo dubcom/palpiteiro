@@ -6,11 +6,6 @@ import { AuthGoogleContext } from "../../contexts/authGoogle";
 import { useId } from "react-id-generator";
 
 
-import QRCode from "qrcode.react";
-
-
-import Pix from "../pix";
-
 
 export const Dashboard = () => {
 
@@ -25,12 +20,13 @@ export const Dashboard = () => {
 
   const [awayTeamScore, setAwayTeamScore] = useState("");
   const [homeTeamScore, setHomeTeamScore] = useState("");
-  const [userId, setUserId] = useState(userLogin.uid);
-  const [nameBet, seteNameBet] = useState(userLogin.displayName);
+  const [userId] = useState(userLogin.uid);
+  const [nameBet] = useState(userLogin.displayName);
   const valueBet = 5;
-  const [idPayment] = useId();
-
+  const [idPayment ] = useId();
  
+
+
   async function handleChange() {
 
     const data = {
@@ -39,38 +35,25 @@ export const Dashboard = () => {
       awayTeamScore: awayTeamScore,
       homeTeamScore: homeTeamScore,
       valueBet: valueBet,
-      createdAt: new Date().toLocaleString().toLocaleString('pt-BR')
+      createdAt: new Date().toLocaleString().toLocaleString('pt-BR'),
+      idPayment: idPayment
 
     }
     console.log(data)
     const db = getDatabase();
     await push(ref(db, `bet/${userId}/betCreated`), data);
+
+      // criar um redirecionamento para payment
+      window.location.href = `/${idPayment}`;
+
   }
 
-  // Create  payload the pix pagment 
-  const chave = "ed46845b-09a6-4a0b-8323-95fea32b3968"
-  const message = "Pagamento de aposta"
-  const name = "DubcomTecnologia"
-  const city = "Florianopolis"
-  const textId = idPayment
-  const valorPix = 5
-
-
-  const pix = new Pix(
-    chave,
-    message,
-    name,
-    city,
-    textId,
-    valorPix
-  );
-  const payload = pix.getPayload();
-  console.log(payload)
   const handleClick = () => {
     // 👇️ clear input value
     setAwayTeamScore("");
     setHomeTeamScore("");
   };
+  
 
 
   return (
@@ -151,28 +134,6 @@ export const Dashboard = () => {
             </div>
 
           </div>
-
-          <div className="rounded-xl center flex flex-col text-center bg-white ">
-            <div>
-              <QRCode value={payload}
-                size={280}
-                level={"H"}
-                includeMargin={true}
-                className="p-2 center" />
-            </div>
-          
-            <div className=" bg-green-200">
-              <h3 className=" text-red-500 font-bold text-1xl ">Pague com o PIX</h3>
-              <p className="text-red-700 px-2 text-xs ">{payload}</p>
-             <div className="p-2">
-
-              <button onClick={() =>  navigator.clipboard.writeText(payload)} 
-              className="bg-red-500 text-white font-bold py-2 px-4  rounded-full"> Copiar pix </button>
-             </div>
-              
-            </div>
-          </div>
-
 
           <div>
             <button onClick={() => { }}
